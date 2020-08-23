@@ -317,7 +317,8 @@ static void handle_payload(int i, struct ports *port, unsigned char *payload, st
       port->type = type;
    }
 
-   struct input_event events[12+6+1] = {0}; // buttons + axis + syn event
+//   struct input_event events[12+6+1] = {0}; // buttons + axis + syn event
+   struct input_event events[12+4+1] = {0}; // buttons + axis + syn event
    int e_count = 0;
 
    uint16_t btns = (uint16_t) payload[1] << 8 | (uint16_t) payload[2];
@@ -341,7 +342,7 @@ static void handle_payload(int i, struct ports *port, unsigned char *payload, st
       }
    }
 
-   for (int j = 0; j < 6; j++)
+   for (int j = 0; j < 4; j++)
    {
       unsigned char value = payload[j+3];
 
