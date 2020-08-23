@@ -52,13 +52,14 @@ const int BUTTON_OFFSET_VALUES[16] = {
    BTN_DPAD_UP,
 };
 
-const int AXIS_OFFSET_VALUES[6] = {
+//const int AXIS_OFFSET_VALUES[6] = {
+const int AXIS_OFFSET_VALUES[4] = {
    ABS_X,
    ABS_Y,
    ABS_RX,
-   ABS_RY,
-   ABS_Z,
-   ABS_RZ
+   ABS_RY //,
+//   ABS_Z,
+//   ABS_RZ
 };
 
 struct ff_event
@@ -79,7 +80,8 @@ struct ports
    int uinput;
    unsigned char type;
    uint16_t buttons;
-   uint8_t axis[6];
+//   uint8_t axis[6];
+   uint8_t axis[4];
    struct ff_event ff_events[MAX_FF_EVENTS];
 };
 
@@ -143,8 +145,8 @@ static bool uinput_create(int i, struct ports *port, unsigned char type)
    ioctl(port->uinput, UI_SET_ABSBIT, ABS_Y);
    ioctl(port->uinput, UI_SET_ABSBIT, ABS_RX);
    ioctl(port->uinput, UI_SET_ABSBIT, ABS_RY);
-   ioctl(port->uinput, UI_SET_ABSBIT, ABS_Z);
-   ioctl(port->uinput, UI_SET_ABSBIT, ABS_RZ);
+   //ioctl(port->uinput, UI_SET_ABSBIT, ABS_Z);
+   //ioctl(port->uinput, UI_SET_ABSBIT, ABS_RZ);
 
    if (raw_mode)
    {
@@ -152,8 +154,8 @@ static bool uinput_create(int i, struct ports *port, unsigned char type)
       uinput_dev.absmin[ABS_Y]  = 0;  uinput_dev.absmax[ABS_Y]  = 255;
       uinput_dev.absmin[ABS_RX] = 0;  uinput_dev.absmax[ABS_RX] = 255;
       uinput_dev.absmin[ABS_RY] = 0;  uinput_dev.absmax[ABS_RY] = 255;
-      uinput_dev.absmin[ABS_Z]  = 0;  uinput_dev.absmax[ABS_Z]  = 255;
-      uinput_dev.absmin[ABS_RZ] = 0;  uinput_dev.absmax[ABS_RZ] = 255;
+      //uinput_dev.absmin[ABS_Z]  = 0;  uinput_dev.absmax[ABS_Z]  = 255;
+      //uinput_dev.absmin[ABS_RZ] = 0;  uinput_dev.absmax[ABS_RZ] = 255;
    }
    else
    {
@@ -161,8 +163,8 @@ static bool uinput_create(int i, struct ports *port, unsigned char type)
       uinput_dev.absmin[ABS_Y]  = 20; uinput_dev.absmax[ABS_Y]  = 235;
       uinput_dev.absmin[ABS_RX] = 30; uinput_dev.absmax[ABS_RX] = 225;
       uinput_dev.absmin[ABS_RY] = 30; uinput_dev.absmax[ABS_RY] = 225;
-      uinput_dev.absmin[ABS_Z]  = 25; uinput_dev.absmax[ABS_Z]  = 225;
-      uinput_dev.absmin[ABS_RZ] = 25; uinput_dev.absmax[ABS_RZ] = 225;
+      //uinput_dev.absmin[ABS_Z]  = 25; uinput_dev.absmax[ABS_Z]  = 225;
+      //uinput_dev.absmin[ABS_RZ] = 25; uinput_dev.absmax[ABS_RZ] = 225;
    }
 
    // rumble
